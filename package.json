@@ -1,0 +1,30 @@
+{
+  "name": "nlc-backend",
+  "version": "1.0.0",
+  "author": "Laura Baukol",
+  "description": "website for community show choir",
+  "main": "app.js",
+  "license": "MIT",
+  "scripts": {
+    "knex": "knex",
+    "heroku-postbuild": "knex migrate:latest",
+    "start": "node app.js",
+    "test": "mocha"
+  },
+  "keywords": [],
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "knex": "^0.12.6",
+    "pg": "^6.1.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "supertest": "^2.0.1",
+    "engines": {
+      "node": "^7.0.0"
+    }
+  }
+}

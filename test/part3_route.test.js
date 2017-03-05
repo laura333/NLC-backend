@@ -8,7 +8,7 @@ const request = require('supertest');
 const knex = require('../knex');
 const server = require('../server');
 
-suite('Part 3: CRUD routes for classifieds resource should be created.', () => {
+suite('Part 3: CRUD routes for photos resource should be created.', () => {
 
   before((done) => {
   knex.migrate.latest()
@@ -30,56 +30,56 @@ suite('Part 3: CRUD routes for classifieds resource should be created.', () => {
       });
   });
 
-  test('GET /classifieds should return the id,title, description, price and item_image of all classifieds.', (done) => {
+  test('GET /photos should return the id,title, description, show and image of all photos.', (done) => {
     /* eslint-disable max-len */
     request(server)
-      .get('/classifieds')
+      .get('/photos')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200, [{
           id:1,
-          title:'NES Classic',
-          description:'I got lucky and found it, and decided to charge 10x what it was worth.',
-          price:600,
-          item_image:'http://www.nintendo.com/images/page/nes-classic/nes-classic-edition-box.png'
+          title:'Spring 2016',
+          description:'strike a pose',
+          show:'It\'s An Honor To Be Nominated!',
+          image:'http://www.northlandchorale.org/images/photos/Spring2016@2x.jpg'
         },{
           id:2,
-          title:'Pikachu 9" Plush Stuffed Toy',
-          description:'Polyester fiber construction Officially licensed.',
-          price:10,
-          item_image:'https://images-na.ssl-images-amazon.com/images/I/41VwGotRZsL._SY300_.jpg'
+          title:'Fall 2016',
+          description:'Colorful Chorale',
+          show:'Dancy Party!',
+          image:'http://www.northlandchorale.org/images/photos/Fall2016@2x.jpg'
         }], done);
 
       /* eslint-enable max-len */
   });
 
-  test('GET /classifieds/:id should return the id,title, description, price and item_image of a single ad.', (done) => {
+  test('GET /photos/:id should return the id,title, description, show and image of a single ad.', (done) => {
     /* eslint-disable max-len */
     request(server)
-      .get('/classifieds/1')
+      .get('/photos/1')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200, {
           id:1,
-          title:'NES Classic',
-          description:'I got lucky and found it, and decided to charge 10x what it was worth.',
-          price:600,
-          item_image:'http://www.nintendo.com/images/page/nes-classic/nes-classic-edition-box.png'
+          title:'Spring 2016',
+          description:'strike a pose',
+          show:'It\'s An Honor To Be Nominated!',
+          image:'http://www.northlandchorale.org/images/photos/Spring2016@2x.jpg'
       }, done);
 
       /* eslint-enable max-len */
   });
 
-  test('POST /classifieds should create a new ad and return the id, title, description, price and item_image that were created.', (done) => {
+  test('POST /photos should create a new photo and return the id, title, description, show and image that were created.', (done) => {
   /* eslint-disable max-len */
   request(server)
-    .post('/classifieds')
+    .post('/photos')
     .set('Accept', 'application/json')
     .send({
-          title:'Teddi\'s iPhone',
-          description:'Finders Keepers',
-          price:50,
-          item_image:'https://cdn.pixabay.com/photo/2014/11/05/17/07/iphone-518101_1280.jpg'
+          title:'Fall 2016-2',
+          description:'Uptown Funk',
+          show:'Dancy Party!',
+          image:'http://www.northlandchorale.org/images/photos/Fall2016_2-2@2x.jpg'
     })
     .expect('Content-Type', /json/)
     .expect((res) => {
@@ -88,26 +88,26 @@ suite('Part 3: CRUD routes for classifieds resource should be created.', () => {
     })
     .expect(200, {
           id: 3,
-          title:'Teddi\'s iPhone',
-          description:'Finders Keepers',
-          price:50,
-          item_image:'https://cdn.pixabay.com/photo/2014/11/05/17/07/iphone-518101_1280.jpg'
+          title:'Fall 2016-2',
+          description:'Uptown Funk',
+          show:'Dancy Party!',
+          image:'http://www.northlandchorale.org/images/photos/Fall2016_2-2@2x.jpg'
     }, done);
 
     /* eslint-enable max-len */
   });
 
-  test('PATCH /classifieds/:id should update an ad and return the id, title, description, price and item_image that were updated.', (done) => {
+  test('PATCH /photos/:id should update a photo and return the id, title, description, show and image that were updated.', (done) => {
   /* eslint-disable max-len */
   request(server)
-    .patch('/classifieds/1')
+    .patch('/photos/1')
     .set('Accept', 'application/json')
     .send({
           id:1,
-          title:'NES Classic',
-          description:'I got lucky and found it, and decided to charge 10x what it was worth.',
-          price:1000,
-          item_image:'http://www.nintendo.com/images/page/nes-classic/nes-classic-edition-box.png'
+          title:'Spring 2016',
+          description:'act 2 fancy attire',
+          show:'It\'s An Honor To Be Nominated!',
+          image:'http://www.northlandchorale.org/images/photos/Spring2016_2@2x.jpg'
       })
     .expect('Content-Type', /json/)
     .expect((res) => {
@@ -117,18 +117,18 @@ suite('Part 3: CRUD routes for classifieds resource should be created.', () => {
     .expect(200, {
           id:1,
           title:'NES Classic',
-          description:'I got lucky and found it, and decided to charge 10x what it was worth.',
-          price:1000,
-          item_image:'http://www.nintendo.com/images/page/nes-classic/nes-classic-edition-box.png'
+          description:'act 2 fancy attire',
+          show:'It\'s An Honor To Be Nominated!',
+          image:'http://www.northlandchorale.org/images/photos/Spring2016_2@2x.jpg'
       }, done);
 
     /* eslint-enable max-len */
   });
 
-  test('DELETE /classifieds/:id should delete an ad and return the id,title, description, price, and item_image that were deleted.', (done) => {
+  test('DELETE /photos/:id should delete a photo and return the id, title, description, show, and image that were deleted.', (done) => {
     /* eslint-disable max-len */
     request(server)
-      .del('/classifieds/2')
+      .del('/photos/2')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect((res) => {
@@ -137,10 +137,10 @@ suite('Part 3: CRUD routes for classifieds resource should be created.', () => {
       })
       .expect(200, {
           id:2,
-          title:'Pikachu 9" Plush Stuffed Toy',
-          description:'Polyester fiber construction Officially licensed.',
-          price:10,
-          item_image:'https://images-na.ssl-images-amazon.com/images/I/41VwGotRZsL._SY300_.jpg'
+          title:'Fall 2016',
+          description:'colorful Chorale',
+          show:'Dancy Party!',
+          image:'http://www.northlandchorale.org/images/photos/Fall2016@2x.jpg'
         }, done);
 
       /* eslint-enable max-len */

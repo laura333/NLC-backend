@@ -8,7 +8,7 @@ const assert = require('chai').assert;
 const { suite, test } = require('mocha');
 const knex = require('../knex');
 
-suite('Part 2: Seed data for classifieds should be created.', () => {
+suite('Part 2: Seed data for photos should be created.', () => {
   before((done) => {
     knex.migrate.latest()
       .then(() => {
@@ -29,26 +29,26 @@ suite('Part 2: Seed data for classifieds should be created.', () => {
       });
   });
 
-  test('classifieds table: seed data should match test data.', (done) => {
-    knex('classifieds').orderBy('id', 'ASC')
+  test('photos table: seed data should match test data.', (done) => {
+    knex('photos').orderBy('id', 'ASC')
       .then((actual) => {
         /* eslint-disable max-len */
         const expected = [{
           id:1,
-          title:'NES Classic',
-          description:'I got lucky and found it, and decided to charge 10x what it was worth.',
-          price:600,
-          item_image:'http://www.nintendo.com/images/page/nes-classic/nes-classic-edition-box.png',
-          created_at: new Date('2016-06-26 14:26:16 UTC'),
-          updated_at: new Date('2016-06-26 14:26:16 UTC')
+          title:'Spring 2016',
+          description:'strike a pose',
+          show:'It\'s An Honor To Be Nominated!',
+          image:'http://www.northlandchorale.org/images/photos/Spring2016@2x.jpg',
+          // created_at: new Date('2017-02-24 00:07:16 UTC'),
+          // updated_at: new Date('2017-02-24 00:07:16 UTC')
         },{
           id:2,
-          title:'Pikachu 9" Plush Stuffed Toy',
-          description:'Polyester fiber construction Officially licensed.',
-          price:10,
-          item_image:'https://images-na.ssl-images-amazon.com/images/I/41VwGotRZsL._SY300_.jpg',
-          created_at: new Date('2016-06-26 14:26:16 UTC'),
-          updated_at: new Date('2016-06-26 14:26:16 UTC')
+          title:'Fall 2016',
+          description:'colorful Chorale',
+          show:'Dancy Party!',
+          image:'http://www.northlandchorale.org/images/photos/Fall2016@2x.jpg',
+          // created_at: new Date('2017-02-24 00:07:16 UTC'),
+          // updated_at: new Date('2017-02-24 00:07:16 UTC')
         }];
 
         /* eslint-enable max-len */
